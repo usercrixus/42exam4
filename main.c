@@ -1,9 +1,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
 int std_in;
-int std_out;
 
 void printt_err(char *str)
 {
@@ -35,22 +35,15 @@ void ft_exec(char **argv, int limit, char **envp)
 		return ;
 	}
 
-
 	int pipe_fd[2];
 	pipe(pipe_fd);
 	int pid = fork();
 	if (!pid)
 	{
 		if (i < limit && strcmp(argv[i], "|") == 0)
-		{
 			dup2(pipe_fd[1], 1);
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-		}
-		else
-		{
-			dup2(std_out, 1);
-		}
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
 		argv[i] = 0;
 		if (execve(argv[0], argv, envp) == -1)
 		{
@@ -58,20 +51,17 @@ void ft_exec(char **argv, int limit, char **envp)
 			printt_err(argv[0]);
 			printt_err("\n");
 		}
+		exit(0);
 	}
 	else
 	{
 		waitpid(pid, NULL, 0);
 		if (i < limit && strcmp(argv[i], "|") == 0)
-		{
 			dup2(pipe_fd[0], 0);
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-		}
 		else
-		{
 			dup2(std_in, 0);
-		}
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
 	}
 }
 
@@ -84,7 +74,6 @@ int main(int argc, char **argv, char **envp)
 	argc--;
 	
 	std_in = dup(0);
-	std_out = dup(1);
 
 	char **argv_buffer;
 	int i = 0;
