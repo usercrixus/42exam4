@@ -79,7 +79,7 @@ int main(int argc, char **argv, char **envp)
 	int i = 0;
 	while (i < argc)
 	{
-		if (i < argc && (strcmp(argv[i], ";") == 0 || strcmp(argv[i], "|") == 0))
+		if (strcmp(argv[i], ";") == 0 || strcmp(argv[i], "|") == 0)
 		{
 			i++;
 			continue;
