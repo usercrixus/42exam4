@@ -1,4 +1,4 @@
-# 🐚 Mini Shell Executor in C
+# 🐚 Microshell 42 exam4
 
 This project implements a minimal Unix shell emulator in C that supports:
 
