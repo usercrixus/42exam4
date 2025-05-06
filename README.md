@@ -1,4 +1,4 @@
-# 🐚 Microshell 42 exam4
+# Microshell 42 exam4
 
 This project implements a minimal Unix shell emulator in C that supports:
 
@@ -7,7 +7,7 @@ This project implements a minimal Unix shell emulator in C that supports:
     command sequencing (;)
     the cd built-in command with basic error handling
 
-## 🧠 Features
+## Features
 
     Execute external programs using execve
     Support for | (piping) between commands
@@ -16,7 +16,7 @@ This project implements a minimal Unix shell emulator in C that supports:
     Error output to stderr using write(2, ...)
     Minimal memory usage, no dynamic memory allocation
 
-## 📄 Source Overview
+## Source Overview
 
     int std_in; // Backup of original stdin
     void printt_err(char *str); // Custom error message printer to stderr
